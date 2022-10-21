@@ -1,0 +1,75 @@
+﻿@page
+@model CodeMastaModel
+@{
+    ViewData["Title"] = "You are welcomed by CodeMasta";
+}
+<h1>@ViewData["Title"]</h1>
+
+<style>
+    .navbar {
+        background-color: black !important;
+        border-bottom: 1px solid yellow !important;
+    }
+
+    .nav-link {
+        color: yellow !important;
+    }
+
+    .navbar-brand {
+        color: yellow !important;
+    }
+
+    .footer {
+        display: flex;
+        justify-content: center;
+        padding: 5px;
+        background-color: black;
+        border-top: 1px solid yellow !important;
+    }
+</style>
+
+<body style="background-color:yellow;">
+    <center>
+        <p><font size="+1">Cyberpunk vibe:</font></p>
+        
+        <iframe width="579" height="328"
+                src="https://www.youtube.com/embed/R0pRS0LEv1g?&autoplay=1&mute=0" frameborder="0" allowfullscreen>
+        </iframe>
+
+        <p> [Crying emoji] </p>
+
+        <p>Poruszasz sie tym ludzikiem --> <img id="my_image" style="position:absolute;" src="http://i.imgur.com/3TlSM.gif" /> </p>
+    </center>
+</body>
+
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script>
+    $("body").keydown(function (e) {
+        var max = $('body').width();
+        var min = 0;
+        var move_amt = 20;
+        var position = $("#my_image").offset();
+        if (e.which == 37) { // left
+            var new_left = ((position.left - move_amt < min) ? min : position.left - move_amt);
+            $("#my_image").offset({ left: new_left })
+        }
+        else if (e.which == 39) { // right
+            var new_left = ((position.left + move_amt > max) ? max : position.left + move_amt);
+            $("#my_image").offset({ left: new_left })
+        }
+        else if (e.which == 38) { // up
+            var new_top = ((position.top - move_amt < min) ? min : position.top - move_amt);
+            $("#my_image").offset({ top: new_top })
+        }
+        else if (e.which == 40) { // down
+            var new_top = ((position.top + move_amt > max) ? max : position.top + move_amt);
+            $("#my_image").offset({ top: new_top })
+        }
+        else if (e.which == 32) { // info
+            alert("Top" + position.top + "Left" + position.left);
+        }
+        else if (e.which == 13) { // set
+            $("#my_image").offset({ left: 880, top: 540 })
+        }
+    });
+</script>

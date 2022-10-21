@@ -1,0 +1,95 @@
+﻿@page
+@model Page_Of_Everything.Pages.Into_The_MatrixModel
+@{
+}
+
+<canvas></canvas>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background: #000;
+    }
+
+    canvas {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+    }
+
+    #canvasSection {
+        position: fixed;
+    }
+    .navbar {
+        background-color: transparent !important;
+        border-bottom: #0f0 !important; /*dont display line under the navbar (should looks like that ->"5px solid (color) !important")*/
+    }
+
+    .nav-link {
+        color: #0f0 !important;
+    }
+
+    .navbar-brand {
+        color: #0f0 !important;
+    }
+
+    .footer{
+        border-top: #0f0 !important; /*dont display line (should looks like that ->"5px solid (color) !important")*/
+    }
+
+    
+    
+</style>
+
+
+<body>
+    <script>
+        // Initialising the canvas
+        var canvas = document.querySelector('canvas'),
+            ctx = canvas.getContext('2d');
+
+        // Setting the width and height of the canvas
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Setting up the letters
+        var letters = 'ぁあぃあいうえおがぎげでづジザゴコシケゲグヅツヂ';
+        letters = letters.split('');
+
+        // Setting up the columns
+        var fontSize = 10,
+            columns = canvas.width / fontSize;
+
+        // Setting up the drops
+        var drops = [];
+        for (var i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
+
+        // Setting up the draw function
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, .1)';
+            ctx.fillRect(0, 0, canvas.width+100, canvas.height);
+            for (var i = 0; i < drops.length; i++) {
+                var text = letters[Math.floor(Math.random() * letters.length)];
+                ctx.fillStyle = '#0f0';
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                drops[i]++;
+                if (drops[i] * fontSize > canvas.height && Math.random() > .95) {
+                    drops[i] = 0;
+                }
+            }
+        }
+
+        // Loop the animation
+        setInterval(draw, 33);
+        
+    </script>
+    
+</body>
+
+
